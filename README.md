@@ -1,3 +1,7 @@
+To run the Java Backend:
+
+Run the project with IntelliJ
+
 To run the mysql databse
 1. Install Docker Desktop
 2. To run docker container :
