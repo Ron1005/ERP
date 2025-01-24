@@ -15,15 +15,15 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(Views.Summary.class)
+    @JsonView({Views.Summary.class,Views.TransactionInvoiceList.class})
     private int transactionId;
 
     @Column(nullable = false)
-   @JsonView(Views.Summary.class)
+   @JsonView({Views.Summary.class,Views.TransactionInvoiceList.class})
     private String transactionType;
 
     @Column(nullable = false)
-    @JsonView(Views.Summary.class)
+    @JsonView({Views.Summary.class,Views.TransactionInvoiceList.class})
     private LocalDate transactionDate;
 
     public BigDecimal getTotalprice() {
@@ -35,7 +35,7 @@ public class Transaction {
     }
 
     @Column(nullable = false)
-   @JsonView(Views.Summary.class)
+   @JsonView({Views.Summary.class,Views.TransactionInvoiceDetail.class})
     private BigDecimal totalprice;
 
     public String getTransactionType() {
@@ -78,13 +78,25 @@ public class Transaction {
         this.transactionItems = transactionItems;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Column(nullable = false)
+    @JsonView({Views.Summary.class,Views.TransactionInvoiceList.class})
+    private String status;
+
     @ManyToOne()
     @JoinColumn(name = "customerId")
-   @JsonView(Views.Detail.class)
+    @JsonView({Views.Detail.class,Views.TransactionInvoiceList.class})
     private Customer customer;
 
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-   @JsonView(Views.Detail.class)
+    @JsonView({Views.Detail.class,Views.TransactionInvoiceDetail.class})
     private List<TransactionItems> transactionItems;
 
 }

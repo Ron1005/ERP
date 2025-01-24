@@ -37,9 +37,10 @@ public class TransactionService {
     public void createTransaction(@RequestBody Map<String, Object> body){
         Transaction newTransaction = new Transaction();
         newTransaction.setTransactionType((String) body.get("transactionType"));
-        LocalDate localDate = LocalDate.parse((String) body.get("transactionDate"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        LocalDate localDate = LocalDate.parse((String) body.get("transactionDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         newTransaction.setTransactionDate(localDate);
         newTransaction.setTotalprice(BigDecimal.ZERO);
+        newTransaction.setStatus("Approved");
         Optional<Customer> Cust  = customerrepo.findAll().stream().filter(
                 customer -> customer.getCustomerCode().equals((String) body.get("customerCode"))).findFirst();
         Cust.ifPresent(newTransaction::setCustomer);
@@ -52,5 +53,10 @@ public class TransactionService {
 //            System.out.println(obj.get("name"));
 //            System.out.println(obj.get("quantity"));
 //        }
+    }
+
+    public void updateTransactionStatus(Transaction T,String status){
+        T.setStatus(status);
+        repo.save(T);
     }
 }

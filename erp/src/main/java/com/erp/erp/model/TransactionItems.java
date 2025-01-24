@@ -62,7 +62,6 @@ public class TransactionItems {
 
     @ManyToOne()
     @JoinColumn(name = "itemId")
-    @JsonIgnore
     private Item item;
 
     @ManyToOne()
