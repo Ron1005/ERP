@@ -34,4 +34,9 @@ public class TransactionInvoiceController {
     public TransactionInvoice getTransaction(@PathVariable int id){
         return transactionInvoiceService.getTransactionInvoice(id);
     }
+
+    @PostMapping("/transactionInvoice/payment")
+    public void transactionInvoicePayment(){
+
+    }
 }

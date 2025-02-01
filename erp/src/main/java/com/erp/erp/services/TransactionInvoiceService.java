@@ -48,4 +48,15 @@ public class TransactionInvoiceService {
         Optional<TransactionInvoice> T = repo.findById(id);
         return T.orElseThrow(() -> new RuntimeException("Transaction Invoice not found!"));
     }
+
+    public void updateTransactionInvoiceStatus(Integer invoiceId,String status){
+        Optional<TransactionInvoice> transactionInvoice = repo.findById(invoiceId);
+        transactionInvoice.ifPresent(traninvoice -> {
+            Transaction T = traninvoice.getTransaction();
+            T.setStatus("Closed");
+            transactionRepository.save(T);
+            traninvoice.setStatus(status);
+            repo.save(traninvoice);  // Explicitly save the updated entity
+        });
+    }
 }

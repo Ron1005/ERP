@@ -23,6 +23,17 @@ public class Item {
     @Column(nullable = false)
     private BigDecimal quantity;
 
+    public String getPriceId() {
+        return priceId;
+    }
+
+    public void setPriceId(String priceId) {
+        this.priceId = priceId;
+    }
+
+    @Column(nullable = true)
+    private String priceId;
+
 //    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private List<TransactionItems> transactionItems;
 
