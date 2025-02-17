@@ -1,27 +1,87 @@
-To run the Java Backend:
+# ERP System
 
-Run the project with IntelliJ
+## Overview
+This is an **Enterprise Resource Planning (ERP)** system designed for managing **inventory, sales, and finance**. The system is built using **Java, Spring Boot, and MySQL**, providing a scalable and efficient solution for business resource management.
 
-Backend should be running on port : 8080
+## Features
+* **Inventory Management**: Track stock levels, purchases, and suppliers.
+* **Sales Management**: Manage customer orders, invoices, and transactions.
+* **Finance Module**: Handle accounts, payments, and financial reports.
+* **Role-Based Access**: Admin, Manager, and Employee access control.
+* **RESTful APIs**: Built using **Spring Boot** for seamless integration.
+* **Database Integration**: Uses **MySQL** for storing business data.
 
-To run the mysql databse
-1. Install Docker Desktop
-2. To run docker container :
-   
-  docker run --name erp-mysql -e MYSQL_ROOT_PASSWORD=root123 -p 3306:3306 -d mysql:8.0
+## Tech Stack
+* **Backend**: Java, Spring Boot
+* **Frontend**: Next.js
+* **Database**: MySQL
+* **Version Control**: Git, GitHub
+* **Build Tool**: Maven
+* **Security**: JWT-based authentication
 
-3. To open mysql in docker contianer enter the following command in docker terminal:
-   
-  docker exec -it erp-mysql mysql -u root -proot123
+## Installation and Setup
 
-MYSQL database should be running on port: 3306
+### Prerequisites
+Ensure you have the following installed:
+* **Java JDK (17 or later)**
+* **Maven**
+* **MySQL Server**
+* **Postman (for API testing, optional)**
+* **Docker(or any other software for easier use)**
 
-To run the NextJS frontend:
+### Clone the Repository
+```bash
+git clone https://github.com/Ron1005/ERP.git
+cd ERP
+```
 
-cd to erp-frontend
+### Database Setup
+1. Create a MySQL database:
+```sql
+CREATE DATABASE erp_system;
+```
 
-run npm install
+2. Update `src/main/resources/application.properties` with your MySQL credentials:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/erp_system
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+```
 
-run npm run dev
+### Build and Run the Application
+1. **Compile the project** using Maven:
+```bash
+mvn clean install
+```
 
-your front-end should be running on port: 3000
+2. **Run the application**:
+```bash
+mvn spring-boot:run
+```
+
+3. The application should now be running at `http://localhost:8080`.
+
+## API Documentation
+* The API endpoints are available at:
+```
+http://localhost:8080/api/{module}
+```
+
+* Swagger UI (if enabled) can be accessed at:
+```
+http://localhost:8080/swagger-ui.html
+```
+
+## Usage
+* **Admin**: Can manage users, inventory, and finances.
+* **Manager**: Can handle orders and sales.
+* **Employee**: Can view and process transactions.
+
+## Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -m "Add new feature"`
+4. Push to your fork: `git push origin feature-name`
+5. Open a Pull Request.
